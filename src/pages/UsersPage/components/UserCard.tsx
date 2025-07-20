@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styled from "styled-components";
 import { User } from "../../../types/models/user";
 import { useUser } from "../../../context/UserContext";
@@ -16,7 +17,7 @@ type UserCardProps = {
     user: User;
 };
 
-export default function UserCard({ user }: UserCardProps) {
+function UserCard({ user }: UserCardProps) {
     const { user: currentUser } = useUser();
 
     return (
@@ -56,6 +57,16 @@ export default function UserCard({ user }: UserCardProps) {
         </StyledCard>
     );
 }
+
+export default memo(UserCard, (prevProps, nextProps) => {
+    return (
+        prevProps.user.ID === nextProps.user.ID &&
+        prevProps.user.hasLicense === nextProps.user.hasLicense &&
+        prevProps.user.role === nextProps.user.role &&
+        prevProps.user.name === nextProps.user.name &&
+        prevProps.user.email === nextProps.user.email
+    );
+});
 
 const StyledCard = styled(Card)`
     && {

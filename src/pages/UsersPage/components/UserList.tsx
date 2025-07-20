@@ -26,10 +26,9 @@ export default function UserList({ page = 1, perPage = 10, role = '', hasLicense
         queryFn: () => fetchUsers(page, perPage, search, role, hasLicense).then(res => res.data),
     });
 
-    const userCards = useMemo(() => {
-        return userData?.data.map((user: User) => (
-            <UserCard key={user.ID} user={user} />
-        ));
+    const sortedUsers = useMemo(() => {
+        if (!userData?.data) return [];
+        return [...userData.data].sort((a: User, b: User) => a.email.localeCompare(b.email));
     }, [userData?.data]);
 
     if (isLoading) return <Loader size={60} message="Loading users..." color="#0066CC" />;
@@ -39,13 +38,15 @@ export default function UserList({ page = 1, perPage = 10, role = '', hasLicense
         setTotalPages(userData.pages);
     }
 
-    if (!userData?.data || userData.data.length === 0) {
+    if (!sortedUsers.length) {
         return <Message>No users found.</Message>;
     }
 
     return (
         <Stack>
-            {userCards}
+            {sortedUsers.map((user: User) => (
+                <UserCard key={user.ID} user={user} />
+            ))}
         </Stack>
     );
 }
