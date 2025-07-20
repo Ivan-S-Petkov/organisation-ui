@@ -10,7 +10,7 @@ import {
     Box
 } from "@mui/material";
 import { Person, AdminPanelSettings, Check, Close } from "@mui/icons-material";
-import LicenseButton from "../../../components/LicenseButton";
+import LicenseButton from "./LicenseButton";
 
 type UserCardProps = {
     user: User;
