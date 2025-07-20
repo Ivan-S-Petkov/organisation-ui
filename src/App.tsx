@@ -4,7 +4,7 @@ import Header from './components/Header';
 import LoginModal from './components/LoginModal';
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
-import PlanPage from './components/PlanPage';
+import PlanPage from './pages/PlanPage/PlanPage';
 import UsersPage from './pages/UsersPage/UsersPage';
 import CreateUserPage from './pages/CreateUserPage/CreateUserPage';
 import ProtectedRoute from './components/ProtectedRoute';
